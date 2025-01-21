@@ -1,6 +1,7 @@
 'use client';
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
+import dynamic from "next/dynamic";
 import { Globe } from "./Globe";
 import { GlobeDemo } from "./GridGlobe";
 import { div } from "framer-motion/client";
@@ -9,6 +10,8 @@ import { useState } from "react";
 import animationData from '@/data/confetti.json'
 import MagicButton from "./MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
+
+const LottieNoSSR = dynamic(() => import("react-lottie"), { ssr: false });
 
 export const BentoGrid = ({
   className,
@@ -146,6 +149,14 @@ export const BentoGridItem = ({
               </div>
             </div>
           )}
+
+          {id === 6 && (
+            <div className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"}`}>
+              {/* Dynamically load Lottie only on the client side */}
+              <LottieNoSSR options={defaultOptions} height={200} width={400} />
+            </div>
+          )}
+
           {id === 6 && (
             <div className="mt-5 relative">
               <div className={`absolute -bottom-5 right-0 ${copied ? "block" : "block"}`}>
